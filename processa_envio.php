@@ -15,6 +15,7 @@
 		private $para = null;
 		private $assunto = null;
 		private $mensagem = null;
+		private $retorno=null;
 
 		public function __get($atributo) {
 			return $this->$atributo;
@@ -42,8 +43,7 @@
 	//print_r($mensagem);
 
 	if(!$mensagem->mensagemValida()) {
-		echo 'Mensagem não é válida';
-		die();
+		$mensagem->__set('retorno','com preenchimento das informações');
 	}
 
 	$mail = new PHPMailer(true);
@@ -76,8 +76,34 @@
 			$mail->AltBody = 'É necessario utilizar um client que suporte HTML para ter acesso total ao conteúdo dessa mensagem';
 
 			$mail->send();
-			echo 'E-mail enviado com sucesso';
+			$mensagem->__set('retorno','Menssagem enviada com Sucesso!!');
 	} catch (Exception $e) {
-		echo "Não foi possível enviar este e-mail! Por favor tente novamente mais tarde.";
-		echo 'Detalhes do erro: ' . $mail->ErrorInfo;
+		/* echo "Não foi possível enviar este e-mail! Por favor tente novamente mais tarde.";
+		echo 'Detalhes do erro: ' . $mail->ErrorInfo; */
+
+		$mensagem->__set('retorno','Menssagem enviada com Sucesso!!');
 	}
+?>
+	<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>retorno</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="alert alert-success" role="alert">
+						Um simples alerta success com. Clique nele, se quiser.
+					</div>
+				</div>
+				<div class="row">
+				<a href="index.php" class="btn btn-primary">Voltar</a>
+				</div>
+			</div>
+		</div>
+	</body>
+	</html>
