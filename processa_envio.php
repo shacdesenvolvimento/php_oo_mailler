@@ -46,7 +46,7 @@
 	if(!$mensagem->mensagemValida()) {
 		$mensagem->__set('retorno','com preenchimento das informações');
 	}
-
+//mudei
 	$mail = new PHPMailer(true);
 	try {
 			//Server settings
